@@ -1,7 +1,15 @@
-import express from 'express';
+const express = require('express');
+const axios = require('axios'); // Import axios instead of node-fetch
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 3000;
+app.use(express.json());
+const CLIENT_ID = process.env.CONSUMER_KEY; // Your Twitter API Client ID
+const CLIENT_SECRET = process.env.CONSUMER_SECRET;
+const TOKEN_URL = 'https://api.twitter.com/2/oauth2/token';
 
 // This route will now be accessible by all users
 app.get('/callback', async (req, res) => {
